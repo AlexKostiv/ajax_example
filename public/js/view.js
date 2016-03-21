@@ -12,6 +12,7 @@ var View = (function () {
         this.clearBtn = $('.clear-completed');
         this.filters = $('.filters a');
         this.toggleAllBtn = $('.toggle-all');
+        this.todoCount = $('.todo-count');
     }
 
     View.prototype.render = function (todos) {
@@ -43,6 +44,19 @@ var View = (function () {
        
         this.view = this.view + template;
     };
+
+    View.prototype.renderLeftItems = function (numberItems) {        
+        var leftItemsTemplate = numberItems + ' items left';
+        $(this.todoCount).html(leftItemsTemplate);
+    }
+
+    View.prototype.markAllCompleted = function(status) {
+        if(status) {;
+            this.toggleAllBtn.attr('checked', true);
+        } else {
+            this.toggleAllBtn.attr('checked', false);
+        }
+    }
 
     View.prototype.addChannels = function (channelName, handler) {
         var self = this;
@@ -98,6 +112,8 @@ var View = (function () {
                 handler();
             });
         }
+
+
 
     };
 

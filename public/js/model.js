@@ -15,6 +15,7 @@ var Model = (function () {
             }
         ];
         this.activeFilter = 'all';
+
     }
 
     Model.prototype.toFilter = function (filterType) {
@@ -79,10 +80,28 @@ var Model = (function () {
         });        
     };
 
-    Model.prototype.toggleAll = function () {
+    Model.prototype.toggleAll = function (type) {
         this.items.forEach (function(item) {           
-            item.completed = !item.completed;
+            item.completed = type;
         });
+    };
+
+    Model.prototype.checkCompleted = function () {
+        var notCompleted = this.items.filter (function (item) {
+            return item.completed == false;
+        });              
+        if(notCompleted.length > 0){
+            return false;
+        }
+        return true;        
+    };
+
+    Model.prototype.getNumberItems = function () {
+        var notCompleted = this.items.filter (function (item) {
+            return item.completed == false;
+        }); 
+        return notCompleted.length;
+        debugger;
     }
     
     return Model;

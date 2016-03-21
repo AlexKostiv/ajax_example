@@ -8,6 +8,7 @@ var Controller = (function () {
 
         this.view = view;
         this.model = model;
+        this.allCompleted = self.model.checkCompleted();
 
         //Первоначальная отрисовка списка
         this.show();
@@ -35,14 +36,19 @@ var Controller = (function () {
             self.show();
         });
 
-        this.view.addChannels('toggleAll', function (completedItem) {
-            self.model.toggleAll();
+        this.view.addChannels('toggleAll', function () {
+            self.allCompleted = self.model.checkCompleted();
+            self.model.toggleAll(!self.allCompleted);
             self.show();
-        })
+        });
+
     }
 
     Controller.prototype.show = function () {
         this.view.render(this.model.get());
+        this.allCompleted = this.model.checkCompleted();
+        this.view.markAllCompleted(this.allCompleted);
+        this.view.renderLeftItems(this.model.getNumberItems());
     };
 
     Controller.prototype.setItem = function (title) {
