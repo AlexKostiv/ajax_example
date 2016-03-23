@@ -33,8 +33,8 @@
 //------------------- Отправка данных ! ------------------------
 
         function sendData (newData) {
-            var xhr = new XMLHttpRequest();
-            var newT = {'fruite': newData};
+            var xhr = new XMLHttpRequest(),
+                newT = {'fruite': newData};
 
             xhr.open('POST', 'fruites', false);
 
@@ -65,10 +65,12 @@
             };
         };
 
+// --------------------- chenges ------------------------------------
+
+
         function chengeData (text, id) {
-          
-              var xhr = new XMLHttpRequest();
-            var newText = {'fruite': text};
+            var xhr = new XMLHttpRequest(),
+                newText = {'fruite': text};
 
             xhr.open('PUT', 'fruites/'+id, false);
             xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
@@ -81,20 +83,25 @@
             };
         };
 
+// ----------------------- render -----------------------------------
+
         function render () {
             output.html(' ');
+            input.val('');
             items.forEach(function (item, i){
                 var el = $('<li>',{
                     class: 'newLi',
                     id: i
                 });
                 var span_li = $('<span>'
-                    + item +'</span><input class="input_li"><button>Delete</button>');
+                    + item +'</span><input class="input_li hidden"><button class="dlt_btn">Delete</button>');
 
                 $(span_li[0]).on('dblclick', function () {
                     var text = $(this).text();
-                    debugger;
+                    $(this).addClass('hidden').siblings().removeClass('hidden');                        
+
                      $(span_li[1]).val(text).focus();
+                     debugger;
                 });
 
                 $(span_li[1]).on('blur', function () {
@@ -105,7 +112,6 @@
                 });
 
                 $(span_li[2]).on('click', function () {
-                    console.log(i)
                     deleteDate(i);
                     render();
                 });
@@ -113,7 +119,6 @@
             output.append(el);
             });
         };
-
 
         fetchData();
         addItem();
