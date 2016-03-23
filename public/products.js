@@ -65,7 +65,7 @@
             };
         };
 
-        function chengeDate (text, id) {
+        function chengeData (text, id) {
           
               var xhr = new XMLHttpRequest();
             var newText = {'fruite': text};
@@ -89,7 +89,7 @@
                     id: i
                 });
                 var span_li = $('<span>'
-                    + item +'</span><input class="input_li"><button>DELETE</button>');
+                    + item +'</span><input class="input_li"><button>Delete</button>');
 
                 $(span_li[0]).on('dblclick', function () {
                     var text = $(this).text();
@@ -99,7 +99,7 @@
 
                 $(span_li[1]).on('blur', function () {
                     var text = $(this).val();
-                        chengeDate(text, i);
+                        chengeData(text, i);
                         render();
 
                 });
