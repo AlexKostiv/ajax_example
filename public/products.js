@@ -1,4 +1,94 @@
 (function () {
+    var AJAX = {
+        get: function (url, callback) {
+            var xhr = new XMLHttpRequest();
+    
+            xhr.open('GET', url, true);
+
+            xhr.send();
+            xhr.onreadystatechange = function () {
+            if (this.readyState != 4) {
+                console.log(this.readyState);
+                return;
+            };
+
+            // по окончании запроса доступны:
+            // status, statusText
+            // responseText, responseXML (при content-type: text/xml)
+
+            if (this.status != 200) {
+                // обработать ошибку
+                console.log('Error');
+                return;
+            }
+
+            console.log(xhr.response);
+            callback(JSON.parse(xhr.response));
+            // получить результат из this.responseText или this.responseXML
+            };
+        },
+
+        post: function (url, newData, callback) {
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('POST', url, false);
+                xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+                xhr.send(JSON.stringify( {'fruite': newData}));
+
+                xhr.onreadystatechange = function () {
+                    if(this.readyState != 4){
+                        console.log(this.readyState);
+                    }
+                }
+                
+                if(xhr.status != 200){
+                    console.log(xhr.responseText);
+                    return;
+                };
+                callback(JSON.parse(xhr.response));
+            },
+
+        put: function (url, id, text, callback ) {
+                var xhr = new XMLHttpRequest(),
+                newText = {'fruite': text};
+
+                xhr.open('PUT', url+'/'+id, false);
+                xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+                xhr.send(JSON.stringify(newText));
+
+                xhr.onreadystatechange = function () {
+                    if(this.readyState != 4){
+                        console.log(this.readyState);
+                    }
+                }
+
+                if(xhr.status != 200){
+                    console.log(xhr.responseText);
+                    return;
+                };
+                callbback(JSON.parse(xhr.response));
+            },
+
+        del: function (url, callback) {
+                var xhr = new XMLHttpRequest();
+                var delT = {};
+                xhr.open('DELETE', url, false);
+                xhr.send();
+
+                xhr.onreadystatechange = function () {
+                    if(this.readyState != 4){
+                        console.log(this.readyState);
+                    }
+                }
+
+                if(xhr.status != 200){
+                    console.log(xhr.responseText)
+                    return;
+                };
+             callbback(JSON.parse(xhr.response));
+            }
+        }
+
     function List (root){
         var conteiner = $('.container'),
             output = conteiner.find('.output'),
@@ -17,70 +107,29 @@
         };
 
         function fetchData () {
-            var xhr = new XMLHttpRequest();
-
-            xhr.open('GET', 'fruites', false);
-
-            xhr.send();
-            if(xhr.status != 200) {
-                console.log(xhr.responseText);
-            }else{
-                items = JSON.parse(xhr.response);
-            };
+            AJAX.get('fruites', function (response) {
+                 items = response;
+                 render();
+            });
         };
 
 
 //------------------- Отправка данных ! ------------------------
 
         function sendData (newData) {
-            var xhr = new XMLHttpRequest(),
-                newT = {'fruite': newData};
-
-            xhr.open('POST', 'fruites', false);
-
-            xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-
-            xhr.send(JSON.stringify(newT));
-            
-            if(xhr.status != 200){
-                console.log(xhr.responseText);
-            }else{
-                items = JSON.parse(xhr.response);
-            };
+            items = AJAX.post('fruites', newData)
         };
 // ------------------ Удаление -------------------------------------
 
         function deleteDate (id) {
-            var xhr = new XMLHttpRequest();
-            var delT = {};
-
-            xhr.open('Delete', 'fruites/'+id, false);
-
-            xhr.send();
-
-            if(xhr.status != 200){
-                console.log(xhr.responseText);
-            }else{
-                items = JSON.parse(xhr.response);
-            };
+            items = AJAX.del('fruites/'+id)
         };
 
 // --------------------- chenges ------------------------------------
 
 
         function chengeData (text, id) {
-            var xhr = new XMLHttpRequest(),
-                newText = {'fruite': text};
-
-            xhr.open('PUT', 'fruites/'+id, false);
-            xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-            xhr.send(JSON.stringify(newText));
-
-            if(xhr.status != 200){
-                console.log(xhr.responseText);
-            }else{
-                items = JSON.parse(xhr.response);
-            };
+            items = AJAX.put('fruites', id, text)
         };
 
 // ----------------------- render -----------------------------------
