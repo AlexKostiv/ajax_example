@@ -3,7 +3,7 @@
         var conteiner = $('.container'),
             output = conteiner.find('.output'),
             items = ['hello',10,20,50000],
-            input = conteiner.find('.fieldProduct'),
+            input = conteiner.find('.input'),
             addBtn = conteiner.find('.btn_add');
 
 //----------------- принятие данных ----------------------
@@ -37,11 +37,9 @@
                 newT = {'fruite': newData};
 
             xhr.open('POST', 'fruites', false);
-
             xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-
             xhr.send(JSON.stringify(newT));
-            
+
             if(xhr.status != 200){
                 console.log(xhr.responseText);
             }else{
@@ -51,13 +49,11 @@
 // ------------------ Удаление -------------------------------------
 
         function deleteDate (id) {
-            var xhr = new XMLHttpRequest();
-            var delT = {};
+            var xhr = new XMLHttpRequest(),
+                delT = {};
 
             xhr.open('Delete', 'fruites/'+id, false);
-
             xhr.send();
-
             if(xhr.status != 200){
                 console.log(xhr.responseText);
             }else{
@@ -125,4 +121,4 @@
         render();
     };
     var product = new List();
-}())
+}());
