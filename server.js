@@ -17,6 +17,12 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods","Access-Control-Allow-Methods,  DELETE, PUT");
+    next();
+});
 
 app.use('/', routes);
 app.use('/fruites', fruites);
@@ -29,9 +35,9 @@ app.get('/users', function (req, res) {
 });
 
 
-var server = app.listen(3000, function () {
+var server = app.listen(4001, function () {
     var host = server.address().address;
     var port = server.address().port;
 
-    console.log('Example app listening at http://localhost:3000');
+    console.log('Example app listening at http://localhost:4001');
 });
