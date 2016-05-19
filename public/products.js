@@ -1,3 +1,4 @@
+
 (function () {
     var AJAX = {
         get: function (url, callback) {
@@ -66,7 +67,7 @@
                     console.log(xhr.responseText);
                     return;
                 };
-                callbback(JSON.parse(xhr.response));
+                callback(JSON.parse(xhr.response));
             },
 
         del: function (url, callback) {
@@ -85,7 +86,7 @@
                     console.log(xhr.responseText)
                     return;
                 };
-             callbback(JSON.parse(xhr.response));
+             callback(JSON.parse(xhr.response));
             }
         }
 
