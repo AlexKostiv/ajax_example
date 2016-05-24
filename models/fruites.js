@@ -3,16 +3,9 @@
  */
 var model = {
     fruites: [
-        {
-            name:"Test",
-            id:"0",
-            completed:false
-        },
-        {
-            name:"Test2",
-            id:"0",
-            completed:false
-        }
+        "apples",
+        "banans",
+        "oranges"
     ],
     setItem: function (fruite) {
         this.fruites.push(fruite);
