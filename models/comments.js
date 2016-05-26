@@ -6,24 +6,28 @@ var items = [
     {
         author: 'Jack Jones',
         date: new Date(),
-        text: 'Hello world, loremfdsjfkhlajskdhfk',
-        id: 0
+        text: 'Hello world, I am a dummy comment',
+        id: guid()
     },
     {
         author: 'John Smith',
         date: new Date(),
-        text: 'Hello world, loremfdsjfkhlajskdhfk',
-        id: 1
+        text: 'Hello world, I am a dommy comment!!',
+        id: guid()
     }];
-var id = _.max(items, function (item) {
-        return item.id;
-    }).id + 1;
+
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4()
+}
 
 var commentsModel = {
     setItem: function (data) {
-        data.id = _.max(items, function (item) {
-                return item.id;
-            }).id + 1;
+        data.id = guid();
         data.date = new Date();
 
         items.push(data);
@@ -45,7 +49,7 @@ var commentsModel = {
     },
     deleteItem: function (id) {
         var index = items.indexOf(_.find(items, function (item) {
-            return item.id === Number(id);
+            return item.id === id;
         }));
 
         if (index === -1) {

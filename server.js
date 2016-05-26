@@ -26,7 +26,7 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/fruites', fruites);
-app.use('/comment', comments);
+app.use('/comments', comments);
 app.use('/calc', calc);
 
 app.get('/users', function (req, res) {
