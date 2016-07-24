@@ -31,5 +31,5 @@
         };
     }
 
-    window.observer = observer;
+    Object.prototype.observer = new Observer();
 })(window);

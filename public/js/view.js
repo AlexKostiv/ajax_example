@@ -3,7 +3,7 @@
  */
 //globals observer app
 
-var View = (function () {
+(function (window) {
     function View() {
         console.log('View');
         this.activeBtn = $('#active');
@@ -41,11 +41,11 @@ var View = (function () {
         template = template.replace('{{completed}}', item.completed? 'completed': "");
         template = template.replace('{{checked}}', item.completed? 'checked': '');
         template = template.replace('{{title}}', item.title);
-       
+
         this.view = this.view + template;
     };
 
-    View.prototype.renderLeftItems = function (numberItems) {        
+    View.prototype.renderLeftItems = function (numberItems) {
         var leftItemsTemplate = numberItems + ' items left';
         $(this.todoCount).html(leftItemsTemplate);
     }
@@ -122,5 +122,7 @@ var View = (function () {
         target.on(type, callback);
     }
 
-    return View;
-})();
+    window.app = window.app || {};
+	window.app.View = View;
+
+})(window);

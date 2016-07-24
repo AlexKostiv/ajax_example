@@ -1,7 +1,7 @@
 /**
  * Created by IlyaLitvinov on 14.01.16.
  */
-var Model = (function () {
+(function (window) {
     function Model() {
         this.items = [{
                 id: 0,
@@ -19,7 +19,7 @@ var Model = (function () {
     }
 
     Model.prototype.toFilter = function (filterType) {
-        this.activeFilter = filterType; 
+        this.activeFilter = filterType;
     };
 
     Model.prototype.get = function () {
@@ -69,19 +69,19 @@ var Model = (function () {
     Model.prototype.completedItem = function (completedItem) {
         var t =  this.items.filter (function (item) {
             return item.id === parseInt(completedItem);
-        }); 
+        });
         var index = this.items.indexOf(t[0]);
         this.items[index].completed = !this.items[index].completed;
     };
 
-    Model.prototype.clearCompleted = function () {      
+    Model.prototype.clearCompleted = function () {
         this.items = this.items.filter (function (item) {
             return !item.completed;
-        });        
+        });
     };
 
     Model.prototype.toggleAll = function (type) {
-        this.items.forEach (function(item) {           
+        this.items.forEach (function(item) {
             item.completed = type;
         });
     };
@@ -89,20 +89,21 @@ var Model = (function () {
     Model.prototype.checkCompleted = function () {
         var notCompleted = this.items.filter (function (item) {
             return item.completed == false;
-        });              
+        });
         if(notCompleted.length > 0){
             return false;
         }
-        return true;        
+        return true;
     };
 
     Model.prototype.getNumberItems = function () {
         var notCompleted = this.items.filter (function (item) {
             return item.completed == false;
-        }); 
+        });
         return notCompleted.length;
         debugger;
     }
-    
-    return Model;
-})(); 
+
+    window.app = window.app || {};
+    window.app.Model = Model;
+})();

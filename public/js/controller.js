@@ -56,5 +56,6 @@ var Controller = (function () {
         this.show();
     };
 
-    return Controller;
-})(); 
+    window.app = window.app || {};
+    window.app.Controller = Controller;
+})();
