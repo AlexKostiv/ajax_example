@@ -13,7 +13,7 @@ var express = require('express'),
 router.get('/', function (req, res) {
     setTimeout(function () {
         res.status(200).send(commentsModel.getItems());
-    }, 1000);
+    }, 5000);
 });
 
 router.post('/', function (req, res) {

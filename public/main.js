@@ -1,4 +1,4 @@
-/**
- * Created by IlyaLitvinov on 20.11.15.
- * Здесь писать ваш JS код
- */
+(function () {
+    var ajax = new AJAX ('http://localhost:4001/');
+    var lighter = new TodoList('.container', {},ajax);
+})();
