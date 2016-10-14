@@ -8,32 +8,3 @@ body {
     max-width: 640px;
     padding: 1em;
 }
-.todo_list__head {
-    padding: 1em;
-}
-.todo_list__head  > * {
-    box-sizing: border-box;
-}
-.todo_list__head input {
-    padding: 1em 1.5em;
-    border: 2px solid #00adf9;
-    border-radius: 5px;
-    outline: none;
-    width: 100%;
-}
-.todo_list__comment_field {
-    padding: 1em 1.5em;
-    border: 2px solid #00adf9;
-    border-radius: 5px;
-    outline: none;
-    width: 100%;
-    margin: 1em 0;
-}
-.todo_list__btn_add {
-    width: 100%;
-    background: #00adf9;
-    text-align: center;
-    border-radius: 5px;
-    padding: 1em;
-    color: #FFF;
-}

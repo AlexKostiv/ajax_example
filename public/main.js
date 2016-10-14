@@ -1,4 +1,7 @@
 (function () {
-    var ajax = new AJAX ('http://localhost:4001/');
-    var lighter = new TodoList('.container', {},ajax);
+    var app = new TodoList({
+        rootEl: ".container",
+        headerText: "Tasks"
+        // placeholderText: "Some cool todo list"
+    })
 })();
