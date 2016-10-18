@@ -33,22 +33,20 @@ var listModel = {
         var index = items.indexOf(_.find(items, function (item) {
             return item.id === Number(id);
         }));
-        data.date = new Date();
-        data.id = id;
 
         items[index] = data;
-        return items;
+        return data;
     },
     deleteItem: function (id) {
         var index = items.indexOf(_.find(items, function (item) {
-            return item.id === id;
+            return item.id === Number(id);
         }));
 
         if (index === -1) {
             return false;
         }
 
-        return items.splice(index, 1);;
+        return items.splice(index, 1);
     }
 };
 

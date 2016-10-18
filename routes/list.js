@@ -10,7 +10,7 @@ var express = require('express'),
 router.get('/', function (req, res) {
     setTimeout(function () {
         res.status(200).send(listModel.getItems());
-    }, 10000);
+    }, 0);
 });
 
 router.post('/', function (req, res) {
@@ -26,18 +26,22 @@ router.post('/', function (req, res) {
     }
 });
 
-// router.put('/:id', function (req, res) {
-//     console.log(req.body);
-//     if (req.params.id && req.body) {
-//         res.status(200).send(commentsModel.updateItem(req.body, req.params.id));
-//     } else if (!req.params.id) {
-//         res.status(404).send('Not found').end()
-//     }
-//     else {
-//         res.status(500).send('Bad request').end()
-//     }
-// });
-//
+router.put('/:id', function (req, res) {
+    if (req.params.id && req.body) {
+        if(!req.body.title || !req.body.id || !req.body.completed) {
+            res.status(400).send('Title id and completed required').end();
+        } else {
+            res.status(200).send(listModel.updateItem(req.body, req.params.id));
+        }
+
+    } else if (!req.params.id) {
+        res.status(404).send('Not found').end()
+    }
+    else {
+        res.status(500).send('Bad request').end()
+    }
+});
+
 router.delete('/:id', function (req, res) {
     if (req.params.id) {
         var responseData = listModel.deleteItem(req.params.id);
