@@ -20,20 +20,22 @@ var TodoList = (function () {
         storageKey = null;
 
     function Constructor(options) {
+        this.baseUrl = options.baseUrl;
         this.rootEl = document.querySelector(options.rootEl);
-        this.options = options;
+        this.header = options.headerText;
+        this.placeholder = options.placeholderText;
+        this.ajax = options.ajax;
         storageKey = options.storageKey || "list";
 
-        this.data = readFromStorage();
-
+        this.data = [];
 
         this.init();
     }
 
     Constructor.prototype.renderStatic = function () {
-        var widget = templateStatic.replace('{{listHeader}}', this.options.headerText);
+        var widget = templateStatic.replace('{{listHeader}}', this.header);
 
-        widget = widget.replace('{{placeHolderText}}', this.options.placeholderText || "Enter todos");
+        widget = widget.replace('{{placeHolderText}}', this.placeholder || "Enter todos");
         this.rootEl.innerHTML = widget;
     };
 
@@ -59,10 +61,12 @@ var TodoList = (function () {
     };
 
     Constructor.prototype.init = function () {
+        this.fetchData();
         this.renderStatic();
         this.output = this.rootEl.querySelector(".todo_list__section");
         this.renderItems();
         this.handleEvents();
+        console.log("Hello world");
     };
 
     Constructor.prototype.handleEvents = function () {
@@ -72,18 +76,34 @@ var TodoList = (function () {
             var newItem = null;
             if (e.target.id === "todo_list__head_input__field" && e.keyCode === 13) {
                 newItem = {
-                    title: e.target.value,
-                    completed: false,
-                    id: Date.now()
+                    title: e.target.value
                 };
 
                 e.target.value = "";
 
-                self.data.push(newItem);
-                saveToStorage(self.data);
+                self.saveItem(newItem);
                 self.renderItems();
             }
         });
+    };
+
+    Constructor.prototype.fetchData = function () {
+        var self = this;
+
+        this.ajax.get(this.baseUrl, function (responseFromServer) {
+            self.data = responseFromServer;
+            self.renderItems();
+        });
+        // this.data = ;
+    };
+
+    Constructor.prototype.saveItem = function (newItem) {
+        var self = this;
+
+        this.ajax.post(this.baseUrl, function (response) {
+            self.data.push(response);
+            self.renderItems();
+        }, newItem);
     };
 
     function saveToStorage(dataForSave) {
@@ -91,7 +111,7 @@ var TodoList = (function () {
     }
 
     function readFromStorage () {
-        return JSON.parse(localStorage.getItem(storageKey));
+        return JSON.parse(localStorage.getItem(storageKey)) || [];
     }
 
     return Constructor;
