@@ -1,9 +1,10 @@
-(function () {
-    var app = new TodoList({
+( () => {
+    const ajaxApi = new AjaxAPI('http://localhost:4001');
+    const app = new TodoList({
         rootEl: ".container",
-        headerText: "Tasks",
-        baseUrl: "http://localhost:4001/list",
-        ajax: new Ajax()
+        title: "Todo list",
+        placeholder: "Enter todo list...",
+        ajaxApi
         // placeholderText: "Some cool todo list"
     });
     //

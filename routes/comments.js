@@ -21,7 +21,10 @@ router.post('/', function (req, res) {
 
     if (req.body) {
         response = commentsModel.setItem(req.body);
-        res.status(200).send(response);
+        setTimeout(()=> {
+            res.status(200).send(response);
+        }, 4000);
+
     } else {
         res.status(500).send('Bad request, please specify comment field').end();
     }
