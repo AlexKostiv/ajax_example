@@ -2,7 +2,8 @@ class TodoList {
 
     constructor(options) {
         this.ajaxApi = options.ajaxApi;
-        this.rootElement = document.querySelector(options.rootEl);
+        this.rootElement = $(options.rootEl);
+        this.rootElVanila = document.querySelector(options.rootEl);
         this.listTitle = options.title;
         this.placeholder = options.placeholder;
 
@@ -10,7 +11,7 @@ class TodoList {
             <div class="todo_list__head row">
                 <h3 class="teal-text text-darken-2">{{listHeader}}</h3>
                 <div class="todo_list__head_input input-field col s12">
-                    <input id="todo_list__head_input__field" type="text">
+                    <input class="todo_list__head_input__field" type="text">
                     <label for="todo_list__head_input__field">{{placeHolderText}}</label>
                 </div>
             </div>
@@ -23,25 +24,35 @@ class TodoList {
                        <label for="{{input_id}}"></label>
                    </div>
                    <div class="todo_list__todo_item__title">{{title}}</div>
-                   <div class="">X</div>
+                   <div class="todo_list__btn todo_list__btn_delete">X</div>
                </li>`;
         this.storageKey = null;
 
         this.renderView();
 
-        this.ul = this.rootElement.querySelector('.todo_list__section');
+        this.input = $(this.rootElement).find('.todo_list__head_input__field');
+
+        this.ul = $(this.rootElement).find('.todo_list__section');
+
         this.ajaxApi.fetchData(this.renderList.bind(this), '/list');
-        this.addItem();
+
+        this.handleEvents();
+
+       // this.rootElVanila.addEventListener('click', function (eventObject) {
+       //     console.log("Event fired");
+       //     if(eventObject.target.classList.contains('todo_list__btn_delete')) {
+       //         console.log("Deleted");
+       //     }
+       // });
+
     }
 
     renderView () {
         let appView = this.templateStatic.replace('{{listHeader}}', this.listTitle);
 
-        appView = appView.replace('{{placeHolderText}}', this.listTitle)
-        console.log(appView);
+        appView = appView.replace('{{placeHolderText}}', this.listTitle);
 
-        this.rootElement.innerHTML = appView;
-
+        $(this.rootElement).html(appView);
     }
 
 
@@ -49,25 +60,59 @@ class TodoList {
         let output = '';
 
         list.forEach((item) => {
-            debugger;
-            let li = this.templateItem.replace('{{title}}', item.title);
-
-            output += li;
+            output += this.renderOne(item);
         });
 
 
-        this.ul.innerHTML = output;
+        $(this.ul).html(output);
     }
 
-    addItem () {
+    renderOne (item) {
+        let el = this.templateItem.replace('{{title}}', item.title);
+
+        el = el.replace('{{_id}}', item.id);
+
+        return el;
+    }
+
+
+    addItem (text) {
         let item = {
-            title: "asdasd",
+            title: text,
             completed: false
         };
 
         this.ajaxApi.sendData((newItemObj) => {
-            debugger
+            let el = $("<div>");
+
+            el.html(this.renderOne(newItemObj));
+
+            this.ul.append(el.find('li').unwrap().fadeIn(1000));
         }, '/list', item)
     }
+    deleteItem (id) {
+        this.ajaxApi.deleteItem((resp) => {
+            let target = $(this.rootElement).find('#'+id);
+
+            target.fadeOut(1000, () => {
+                target.remove();
+            });
+        },  '/list', id);
+    }
+    handleEvents () {
+        $(this.input).on('keypress', (e) => {
+            console.log(e);
+            if(e.keyCode === 13) {
+                this.addItem(this.input.val());
+            }
+        });
+
+        $(this.ul).on('click', (e) => {
+            if($(e.target).hasClass('todo_list__btn_delete')) {
+                this.deleteItem($(e.target).parent().attr('id'));
+            }
+        });
+    }
+
 }
 

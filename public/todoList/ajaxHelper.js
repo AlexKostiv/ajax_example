@@ -8,21 +8,10 @@ class AjaxAPI {
     }
 
     fetchData(callback, uri) {
-        const xhr = new XMLHttpRequest();
-
-        xhr.open("GET", this.baseUrl + uri, true);
-
-        xhr.send();
-
-        xhr.addEventListener('readystatechange', () => {
-            if(xhr.readyState === 4) {
-                if(xhr.status !== 200) {
-                    alert("Error!");
-                }
-
-                callback(JSON.parse(xhr.response));
-            }
-        });
+        $.ajax({
+            method: "GET",
+            url: this.baseUrl + uri
+        }).done(callback);
     }
 
     /**
@@ -33,23 +22,17 @@ class AjaxAPI {
      * @param {Boolean} newItem.completed
      * */
     sendData(callback, uri, newItem) {
-        const xhr = new XMLHttpRequest();
-
-        xhr.open("POST", this.baseUrl + uri, true);
-
-        xhr.setRequestHeader("Content-Type", "application/json");
-
-        xhr.send(JSON.stringify(newItem));
-
-        xhr.addEventListener('readystatechange', function () {
-            if(this.readyState === 4) {
-                if(this.status !== 200) {
-                    alert("Error!");
-                }
-
-                callback(JSON.parse(xhr.response));
-            }
-        });
+       $.ajax({
+           method: "POST",
+           url: this.baseUrl + uri,
+           data: newItem
+       }).done(callback)
+    }
+    deleteItem(callback, uri, id) {
+        $.ajax({
+            method: "DELETE",
+            url: this.baseUrl + uri + '/' + id,
+        }).done(callback)
     }
 }
 // var Ajax = (function () {
