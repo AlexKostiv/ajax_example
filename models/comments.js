@@ -39,13 +39,16 @@ var commentsModel = {
     },
     updateItem: function (data, id) {
         var index = items.indexOf(_.find(items, function (item) {
-            return item.id === Number(id);
+            return item.id === id;
         }));
+
+        if(index === -1) {
+            throw new Error("Wrong id provided!")
+        }
         data.date = new Date();
         data.id = id;
 
-        items[index] = data;
-        return items;
+        return data;
     },
     deleteItem: function (id) {
         var index = items.indexOf(_.find(items, function (item) {
