@@ -13,7 +13,7 @@ var express = require('express'),
 router.get('/', function (req, res) {
     setTimeout(function () {
         res.status(200).send(commentsModel.getItems());
-    }, 5000);
+    }, 0);
 });
 
 router.post('/', function (req, res) {
@@ -23,7 +23,7 @@ router.post('/', function (req, res) {
         response = commentsModel.setItem(req.body);
         setTimeout(()=> {
             res.status(200).send(response);
-        }, 4000);
+        }, 0);
 
     } else {
         res.status(500).send('Bad request, please specify comment field').end();
@@ -31,9 +31,10 @@ router.post('/', function (req, res) {
 });
 
 router.put('/:id', function (req, res) {
-    console.log(req.body);
     if (req.params.id && req.body) {
-        res.status(200).send(commentsModel.updateItem(req.body, req.params.id));
+        var data = commentsModel.updateItem(req.body, req.params.id);
+
+        res.status(200).send(data);
     } else if (!req.params.id) {
         res.status(404).send('Not found').end()
     }

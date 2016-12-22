@@ -45,9 +45,11 @@ var commentsModel = {
         if(index === -1) {
             throw new Error("Wrong id provided!")
         }
-        data.date = new Date();
-        data.id = id;
+        var updatedObject = items[index];
 
+        updatedObject.date = new Date();
+        updatedObject.author = data.author || updatedObject.author;
+        updatedObject.text = data.text ||  updatedObject.text;
         return data;
     },
     deleteItem: function (id) {
