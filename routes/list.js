@@ -44,9 +44,10 @@ router.put('/:id', function (req, res) {
 
 router.delete('/:id', function (req, res) {
     if (req.params.id) {
-        var responseData = listModel.deleteItem(req.params.id);
-        if(responseData) {
-            res.status(200).send(responseData);
+        var result = listModel.deleteItem(req.params.id);
+
+        if(result) {
+            res.status(200).send(result);
         } else {
             res.status(404).send('Not found');
         }

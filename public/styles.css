@@ -1,10 +1,32 @@
-body {
-    font-family: sans-serif;
+.parent {
+    padding: 10px;
+    background: blue
+}
+.parent:after {
+    display: table;
+    clear: both;
+    content: ' ';
+    width: 100%;
 }
 
-.container {
-    margin: 0 auto;
-    width:80%;
-    max-width: 640px;
-    padding: 1em;
+.child {
+    height: 50px;
+    width: 50%;
+    box-sizing: border-box;
+
+    display: inline-block;
+    float: left
+}
+
+.red {
+    background: red
+}
+.green {
+    background: green
+}
+.yellow {
+    background: yellow;
+}
+.aqua {
+    background: aqua;
 }
