@@ -30,3 +30,8 @@
 .aqua {
     background: aqua;
 }
+
+.todo_list__todo_item.ng-enter {
+    transition: all 0.5s linear;
+    opacity: 0;
+}

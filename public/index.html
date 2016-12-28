@@ -6,14 +6,47 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-<div class="widget">
-
+<body ng-app="todoList">
+<div class="app-container" ng-controller="mainCtrl as vm">
+    <div class="todo_list">
+        <div class="todo_list__head row">
+            <h3 class="teal-text text-darken-2">{{vm.listHeader}}</h3>
+            <div class="todo_list__head_input input-field col s12">
+                <input class="todo_list__head_input__field"
+                       type="text"
+                       id="todo_list__head_input__field"
+                       ng-model="vm.inputField"
+                       ng-keypress="vm.addItem($event)">
+                <label for="todo_list__head_input__field">{{vm.getTest()}}</label>
+            </div>
+        </div>
+        <ul class="todo_list__section row">
+            <li class="card-panel todo_list__todo_item row"
+                ng-repeat="task in vm.tasks">
+                <div class="col s1 m1 l1 checkbox">
+                    <input type="checkbox" ng-model="task.completed" id="{{task.id}}" ng-checked="task.completed"/>
+                    <label for="{{task.id}}" class="todo_list__checkbox"></label>
+                </div>
+                <div class="todo_list__todo_item__title">{{task.title}}</div>
+                <a ng-click="vm.removeItem(task.id)" class="btn-floating btn-large waves-effect waves-light red">
+                    <i class="material-icons todo_list__btn_delete">X</i>
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>
+
+
 <script src="lib/jquery/jquery-3.1.1.min.js"></script>
+<script src="lib/angular.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-<script src = "scripts/ajaxHelper.js"></script>
-<script src = "scripts/list.js"></script>
-<script src="scripts/main.js"></script>
+<!--<script src = "scripts/mvc/ajaxHelper.js"></script>-->
+<!--<script src = "scripts/mvc/view.js"></script>-->
+<!--<script src = "scripts/mvc/model.js"></script>-->
+<!--<script src = "scripts/mvc/controller.js"></script>-->
+<!--<script src = "scripts/list.js"></script>-->
+<!--<script src="scripts/mvc/main.js"></script>-->
+<script src="scripts/ng-example/app.js"></script>
+
 </body>
 </html>

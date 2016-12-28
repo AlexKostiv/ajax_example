@@ -27,7 +27,8 @@ class List {
             </div>`;
         this.api = api;
 
-        this.data = [];
+        this.data = [];//model
+
         console.log("Line 30");
         this.api.fetchData('http://localhost:4001/list', (data) => {
             this.data = data;
@@ -105,52 +106,47 @@ class List {
         })
     }
 
-    addItem(text) {
-        const newItem = {
-            title: text,
-            completed: false
-        };
-
-        this.api.addItem('http://localhost:4001/list', (savedItem) => {
-            this.data.push(savedItem);
-            this.renderList();
-        }, newItem);
-
-    }
-
-    removeItem(id) {
-        let index = 0;
-        this.api.deleteItem(`http://localhost:4001/list/${id}`, () => {
-            this.data.forEach((item, i) => {
-                if (Number(item.id) === Number(id)) {
-                    index = i;
-                }
-            });
-            this.data.splice(index, 1);
-            this.renderList();
-        });
-    }
-
-    completeItem (id) {
-        let index = 0;
-
-        this.data.forEach((item, i) => {
-            if (Number(item.id) === Number(id)) {
-                index = i;
-            }
-        });
-        const updatedElement = this.data.slice(index, index+1)[0];
-        updatedElement.completed = !updatedElement.completed;
-
-        this.api.updateItem(`http://localhost:4001/list/${id}`, (response) => {
-            debugger;
-            this.data.splice(index, 1, updatedElement);
-            this.renderList();
-        }, updatedElement);
-    }
-
-    test(data) {
-        console.log("test");
-        console.log(data);
-    }
+    // addItem(text) {
+    //     const newItem = {
+    //         title: text,
+    //         completed: false
+    //     };
+    //
+    //     this.api.addItem('http://localhost:4001/list', (savedItem) => {
+    //         this.data.push(savedItem);
+    //         this.renderList();
+    //     }, newItem);
+    //
+    // }
+    //
+    // removeItem(id) {
+    //     let index = 0;
+    //     this.api.deleteItem(`http://localhost:4001/list/${id}`, () => {
+    //         this.data.forEach((item, i) => {
+    //             if (Number(item.id) === Number(id)) {
+    //                 index = i;
+    //             }
+    //         });
+    //         this.data.splice(index, 1);
+    //         this.renderList();
+    //     });
+    // }
+    //
+    // completeItem (id) {
+    //     let index = 0;
+    //
+    //     this.data.forEach((item, i) => {
+    //         if (Number(item.id) === Number(id)) {
+    //             index = i;
+    //         }
+    //     });
+    //     const updatedElement = this.data.slice(index, index+1)[0];
+    //     updatedElement.completed = !updatedElement.completed;
+    //
+    //     this.api.updateItem(`http://localhost:4001/list/${id}`, (response) => {
+    //         debugger;
+    //         this.data.splice(index, 1, updatedElement);
+    //         this.renderList();
+    //     }, updatedElement);
+    // }
 }
