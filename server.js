@@ -12,10 +12,10 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname + '/public/build'));
+app.use(express.static(__dirname + '/public/'));
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/public/build/index.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 app.use(function (req, res, next) {
