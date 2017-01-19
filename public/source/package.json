@@ -39,7 +39,9 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^2.3.1",
     "underscore-template-loader": "^0.7.3",
+    "url-loader": "^0.5.7",
     "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "materialize-loader": "^1.1.1"
   }
 }

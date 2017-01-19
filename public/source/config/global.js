@@ -4,10 +4,17 @@ const HtmlPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const findParentDir = (path) => {
+    return path.split('/')
+        .slice(0, -1)
+        .join('/');
+};
+
 module.exports = _path => {
     //define local variables
-    var dependencies = Object.keys(require(path.normalize(_path + '/package')).dependencies);
-    console.log(path.join(_path + "/app/app.js"));
+    const dependencies = Object.keys(require(path.normalize(_path + '/package')).dependencies);
+    const parentDir = findParentDir(_path);
+
     return {
         //enter point
         entry: {
@@ -16,7 +23,7 @@ module.exports = _path => {
         },
 
         output: {
-            path: path.join(_path, "build"),
+            path: path.join(parentDir, "build"),
             filename: "js/[name].bundle.[chunkhash].js",
             chunkFilename: "[id].bundle.[chunkhash].js",
             publicPath: "/"
@@ -53,6 +60,13 @@ module.exports = _path => {
                     loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader?browsers=last 5 version!stylus-loader')
                 },
                 {
+                    test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                    loader: "url?limit=10000&mimetype=application/font-woff"
+                },
+                {
+                    test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file"
+                },
+                {
 
                     /**
                      * ASSET LOADER
@@ -77,7 +91,7 @@ module.exports = _path => {
         },
 
         plugins: [
-            new ExtractTextPlugin( "bundle.css" ),
+            new ExtractTextPlugin("bundle.css"),
             new CleanWebpackPlugin(["build"], {
                 root: path.normalize(_path),
                 verbose: true,

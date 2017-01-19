@@ -58,7 +58,3 @@ const ListComponent = {
 };
 
 export {ListComponent}
-
-// angular.module("todoList")
-//     .component('list', ListComponent);
-
