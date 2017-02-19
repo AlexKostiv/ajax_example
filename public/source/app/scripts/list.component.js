@@ -19,7 +19,7 @@ class ListController {
             .then(resp => {
                 this.tasks = resp.data;
             });
-        this.testGreet = "Hello i am injected data to component"
+        this.testGreet = "Hello i am injected data to component test"
     }
 
     onAddItem(text) {
