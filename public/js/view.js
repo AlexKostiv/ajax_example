@@ -48,7 +48,7 @@
     View.prototype.renderLeftItems = function (numberItems) {
         var leftItemsTemplate = numberItems + ' items left';
         $(this.todoCount).html(leftItemsTemplate);
-    }
+    };
 
     View.prototype.markAllCompleted = function(status) {
         if(status) {;
@@ -56,7 +56,7 @@
         } else {
             this.toggleAllBtn.attr('checked', false);
         }
-    }
+    };
 
     View.prototype.addChannels = function (channelName, handler) {
         var self = this;

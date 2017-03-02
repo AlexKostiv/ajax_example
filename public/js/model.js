@@ -101,9 +101,8 @@
             return item.completed == false;
         });
         return notCompleted.length;
-        debugger;
-    }
+    };
 
     window.app = window.app || {};
     window.app.Model = Model;
-})();
+})(window);

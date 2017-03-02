@@ -5,11 +5,13 @@
 
     //Точка входа в приложение в этом месте инициализируются все сущности,
     //происходит первоначальное конфигурирование приложения
+    var app = new App();
+
     function App () {
-        this.model =  new app.Model();
-        this.view =  new app.View();
-        this.controller =  new app.Controller(this.model, this.view);
+        this.model =  new window.app.Model();
+        this.view =  new window.app.View();
+        this.controller =  new window.app.Controller(this.model, this.view);
     }
 
-    var app = new App();
+
 })();

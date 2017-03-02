@@ -2,34 +2,51 @@
  * Created by IlyaLitvinov on 15.01.16.
  */
 (function (window) {
-    function observer() {
-        var topics = {};
+    function EventEmiter () {
+        this.subscribers = {}
+    }
+    EventEmiter.prototype.on = on;
+    EventEmiter.prototype.emit = emit;
+    EventEmiter.prototype.off = off;
 
-        this.subscribe = function (topic, listener) {
-            // создаем объект topic, если еще не создан
-            if (!topics[topic]) topics[topic] = {queue: []};
+    function on (event, callback) {
+        if(typeof this.subscribers[event] === 'undefined') {
+            this.subscribers[event] = []
+        }
+        this.subscribers[event].push(callback);
 
-            // добавляем listener в очередь
-            var index = topics[topic].queue.push(listener) - 1;
-
-            // предоставляем возможность удаления темы
-            return {
-                remove: function () {
-                    delete topics[topic].queue[index];
-                }
-            };
-        };
-        this.publish = function (topic, info) {
-            // если темы не существует или нет подписчиков, не делаем ничего
-            if (!topics[topic] || !topics[topic].queue.length) return;
-
-            // проходим по очереди и вызываем подписки
-            var items = topics[topic].queue;
-            items.forEach(function (item) {
-                item(info || {});
-            });
-        };
+        return this.off(event, callback)
     }
 
-    Object.prototype.observer = new Observer();
+    function emit (event, data, context) {
+        var _context = context || window;
+
+        if(typeof this.subscribers[event] === 'undefined') {
+            this.subscribers[event] = [];
+        }
+
+        this.subscribers[event].forEach(function (item) {
+            item.call(_context, data);
+        });
+    }
+
+    function off(event, callback) {
+        var self = this;
+
+        return function unsub () {
+            var subscribers = Object.assign({}, self.subscribers);
+
+            subscribers[event] = subscribers[event].filter(function (handler) {
+                return handler.toString() !== callback.toString();
+            });
+
+            !subscribers[event].length && (delete subscribers[event]);
+
+            self.subscribers = Object.assign({}, subscribers);
+        }
+    }
+
+    Object.assign(Object.prototype, new EventEmiter());
+    Object.assign(Object.prototype, EventEmiter.prototype);
+
 })(window);
