@@ -8,3 +8,7 @@ body {
     max-width: 640px;
     padding: 1em;
 }
+
+.bxslider img {
+    width:100%;
+}

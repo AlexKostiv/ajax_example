@@ -1,0 +1,15 @@
+.dropdown {
+    width: 100%;
+    border: 1px solid red;
+}
+.dropdown__header {
+    background: lightcoral;
+    color: #FFF;
+    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.27);
+}
+.dropdown__options {
+    
+}
+.dropdown .dropdown__options {
+    display: block
+}
