@@ -10,13 +10,14 @@ var express = require('express'),
 router.get('/', function (req, res) {
     setTimeout(function () {
         res.status(200).send(listModel.getItems());
-    }, 0);
+    }, 6000);
 });
 
 router.post('/', function (req, res) {
     var response;
 
     if (req.body) {
+        console.log(req.body);
         setTimeout(function () {
             response = listModel.setItem(req.body);
             res.status(200).send(response);
@@ -28,10 +29,15 @@ router.post('/', function (req, res) {
 
 router.put('/:id', function (req, res) {
     if (req.params.id && req.body) {
-        if(!req.body.title || !req.body.id || !req.body.completed) {
+        if(!req.body.title) {
             res.status(400).send('Title id and completed required').end();
         } else {
-            res.status(200).send(listModel.updateItem(req.body, req.params.id));
+            const response = listModel.updateItem(req.body, req.params.id);
+            if(!response) {
+                 res.status(404).send("Element not found, please provide valide id");
+                 return;
+            }
+            res.status(200).send(response);
         }
 
     } else if (!req.params.id) {
