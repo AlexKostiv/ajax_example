@@ -23,19 +23,27 @@ var listModel = {
         data.id = Date.now();
         data.completed = false;
         items.push(data);
-        console.log('added to Array');
+        console.log(data);
         return data;
     },
     getItems: function () {
         return items;
     },
     updateItem: function (data, id) {
-        var index = items.indexOf(_.find(items, function (item) {
-            return item.id === Number(id);
-        }));
+        var index = items.reduce((index, item, i) => {
+            if(Number(item.id) === Number(id)) {
+                index = i;
+            };
+            return index
+        }, null);
+        if(!index && index !== 0) {
+            return index;
+        }
+    
+        items[index].completed = data.completed;
+        items[index].title = data.title;
 
-        items[index] = data;
-        return data;
+        return items[index];
     },
     deleteItem: function (id) {
         var index = items.indexOf(_.find(items, function (item) {
