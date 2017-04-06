@@ -1,4 +1,6 @@
 import EventEmiter from '../eventEmiter';
+import $ from 'jquery';
+import moment from 'moment';
 
 var BASE_TEMPLATE = '<div class="todo-list">'
         + '<div class="todo-list_header">{{header}}</div>'

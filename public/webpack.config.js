@@ -1,7 +1,14 @@
+const webpack = require('webpack');
+const path = require('path');
+
 module.exports = {
-  entry: './src/app.js',
+  entry: {
+    application: './src/app.js',
+    vendors: ['jquery', 'moment']
+  },
   output: {
-    filename: './bundle.js'
+      filename: '[name].js',
+      path: path.resolve(__dirname, 'dist')
   },
   devtool: 'source-map',
   module: {
@@ -12,5 +19,9 @@ module.exports = {
       }
     ]
   },
-   plugins: []
+   plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendors' // Specify the common bundle's name.
+            })
+   ]
 }
