@@ -16,10 +16,7 @@
     }
 
     function subscribeToModelEvents () {
-        this._model.on('MODEL:DATA_RECIEVD', function (data) {
-            this._view.renderList(data);
-        }.bind(this));
-        this._model.on('MODEL:ITEM_ADDED', function (data) {
+        this._model.on('MODEL:DATA_CHANGED', function (data) {
             this._view.renderList(data);
         }.bind(this));
     }
@@ -28,6 +25,9 @@
         this._view.on('VIEW:ADD_ITEM', function (text) {
             this._model.add(text);
         }.bind(this));
+        this._view.on('VIEW:FILTER_ITEMS', function (filterName) {
+            this._model.filterItems(filterName);
+        }.bind(this))
     }
 
     window.Controller = Controller;

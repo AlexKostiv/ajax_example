@@ -2,6 +2,11 @@
     var BASE_TEMPLATE = '<div class="todo-list">'
             + '<div class="todo-list_header">{{header}}</div>'
             + '<div class="output">{{content}}</div>'
+                + '<div class="footer">'
+                    + '<input class="filter" type="radio" value="ALL" name="filter"/><span>ALL</span>'
+                    + '<input class="filter" type="radio" value="COMPLETED" name="filter"/><span>Completed</span>'
+                    + '<input class="filter" type="radio" value="IN_PROGRESS" name="filter"/><span>In Progress</span>'
+                +'</div>'
             + '</div>',
         HEADER_TEMPLATE = '<h2>{{header-text}}</h2>'
             +'<div class="todo-list_header-controlls">'
@@ -62,7 +67,14 @@
             if (e.target.classList.contains('todo-list_btn')) {
                 addListItem.call(self);
             }
+            if(e.target.classList.contains('filter')) {
+                filterItems.call(self, e.target.value);
+            }
         })
+    }
+
+    function filterItems (filterName) {
+        this.trigger('VIEW:FILTER_ITEMS', filterName);
     }
 
     function addListItem () {
