@@ -1,10 +1,147 @@
-body {
-    font-family: sans-serif;
-}
 
 .container {
+    height: 70px;
+    border-top: 6px solid red;
+}
+
+.label {
+    width: 155px;
+    height: 100%;
+    position: relative;
     margin: 0 auto;
+    background-color: red;
+}
+
+.label-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%)
+}
+.label-triangle {
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    border-left: 77.5px solid transparent;
+    border-right: 77.5px solid transparent;
+    border-bottom: 12px solid #FFF;
+}
+.feature-dishes {
+    width:100%;
+    max-width: 960px;
+    margin:0 auto;
+}
+.section-name {
+    height:50px;
+}
+
+.clearfix:after {
+    content: " ";
+    width:100%;
+    display: table;
+    clear: both;
+} 
+
+.section-name_title {
+    float: left;
+    margin: 0;
+    padding: 0;
+    line-height: 50px;
+}
+
+.section-name_line {
+    float: left;
+    position: relative;
+    width: 40%;
+    height: 100%;
+    padding-left: 10px;
+}
+.section-name_line > .line {
+    height: 2px;
+    background: black;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translate(0, 50%);
+    border-radius: 1px;
+}
+
+.slider {
+    width: 100%;
+    border:1px solid red;
+}
+.slider-viewport {
+    border: 1px solid green;
+    /*overflow: hidden;*/
+}
+.slides {
+    white-space: nowrap;
+    width:100%;
+    padding: 0;
+    margin:0;
+    list-style: none;
+}
+.slide {
+    float: left;
+    width:25%;
+    border: 1ps solid aqua;
+    box-sizing: border-box
+}
+.img-wrapper {
     width:80%;
-    max-width: 640px;
-    padding: 1em;
+    margin: 0 auto;
+}
+.img-wrapper > img {
+    width:100%;
+}
+
+@media screen and (max-width: 768px) {
+    .slides {
+        width: 200%;
+    }
+}
+
+.flex-container {
+    width: 100%;
+    border: 1px solid greenyellow;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.flex-child {
+    flex-basis: 25%;
+    flex-grow:1;
+    flex-shrink: 1;
+    background-color: aqua;
+}
+
+.flex-child:nth-child(1) {
+     flex-shrink: 3;
+}
+
+.flex-child:nth-child(2) {
+     background-color: magenta;
+     flex-grow:6;
+}
+.custom-btn__lime {
+    background-color: lime;
+}
+.custom-btn__lime:active  {
+    box-shadow: 0 0 2px 3px rgba(0,0,0,.3) inset;
+    background-color: darkgreen
+}
+
+.navbar-default .navbar {
+    background: red;
+}
+.navbar {
+    background: green;
+    border-radius: 0;
+}
+.navbar-default 
+.navbar-nav > .active > a.green {
+    color: green;
+    background-color: blue
 }

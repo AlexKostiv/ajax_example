@@ -1,46 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        .bubbling-test, .first, .second, .third {
-            padding: 1em;
-        }
-        .bubbling-test {
-            background: blue
-        }
-        .first {
-            background: red
-        }
-        .second {
-            background: yellow
-        }
-        .third {
-            background: green
-        }
     </style>
 </head>
 <body>
-<div class="container"></div>
-<div class="bubbling-test">
-    <div class="first">
-        <div class="second">
-            <div class="third"></div>
-        </div>
+    <div class="test">
+        
     </div>
-</div>
+    <!--<script src="todo.js"></script>
+    <script src="main.js"></script>-->
 
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-<script src="todoList/todoList.js"></script>
-<script src="todoList/ajaxHelper.js"></script>
-<script src="main.js"></script>
-</body>
+    <script src="api.js"></script>
+    <script src="todoList/eventEmiter.js"></script>
+    <script src="todoList/model.js"></script>
+    <script src="todoList/view.js"></script>
+    <script src="todoList/controller.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
