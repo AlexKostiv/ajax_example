@@ -1,0 +1,7 @@
+.todo-list {
+    background:green;
+    animation: test 1s
+}
+
+@keyframes test {
+}

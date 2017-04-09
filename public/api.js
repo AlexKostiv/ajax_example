@@ -1,42 +1,41 @@
-(function () {
-    function Api (url) {
-        console.log("Hello wolr");
-        this.url = url;
-    }
 
-    Api.prototype.get = get;
-    Api.prototype.post = post;
+function Api (url) {
+    console.log("Hello wolr");
+    this.url = url;
+}
 
-    function get(callbackFunction) {
-        var xhr = new XMLHttpRequest();
+Api.prototype.get = get;
+Api.prototype.post = post;
 
-        xhr.open('GET', this.url, true);
+function get(callbackFunction) {
+    var xhr = new XMLHttpRequest();
 
-        xhr.send();
+    xhr.open('GET', this.url, true);
 
-        xhr.addEventListener('readystatechange', function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                callbackFunction(JSON.parse(xhr.response));
-            }
-        });
-        // if(xhr.status === 200) {
-        //     return JSON.parse(xhr.response);
-        // }
-    }
+    xhr.send();
 
-    function post (callbackFunction, data) {
-        var xhr = new XMLHttpRequest();
+    xhr.addEventListener('readystatechange', function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            callbackFunction(JSON.parse(xhr.response));
+        }
+    });
+    // if(xhr.status === 200) {
+    //     return JSON.parse(xhr.response);
+    // }
+}
 
-        xhr.open('POST', 'http://localhost:4001/list', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(data));
+function post (callbackFunction, data) {
+    var xhr = new XMLHttpRequest();
 
-        xhr.addEventListener('readystatechange', function () {
-            if(xhr.readyState === 4 && xhr.status === 200) {
-                callbackFunction(JSON.parse(xhr.response));
-            }
-        });
-    }
+    xhr.open('POST', 'http://localhost:4001/list', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
 
-    window.Api = Api;
-})();
+    xhr.addEventListener('readystatechange', function () {
+        if(xhr.readyState === 4 && xhr.status === 200) {
+            callbackFunction(JSON.parse(xhr.response));
+        }
+    });
+}
+
+export default Api;
