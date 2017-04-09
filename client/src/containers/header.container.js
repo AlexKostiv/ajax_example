@@ -4,15 +4,15 @@
 import React, { Component } from 'react';
 import { addItem } from '../actions/actions';
 import { connect } from 'react-redux'
+import Input from '../components/input.component';
 
 class Header extends Component {
     constructor() {
         super();
-        // this.state = { inputValue: 'Hello'};
     }
 
-    onSubmit(e) {
-        this.props.onAddItem(e.target.value);
+    addItem(text) {
+        this.props.onAddItem(text);
     }
 
     render() {
@@ -20,11 +20,7 @@ class Header extends Component {
 
         return <div className="todo__header">
             <h2 className="todo__title">{title}</h2>
-            <input type="text"
-                   onSubmit={this.onSubmit.bind(this)}/>
-            <input type="button"
-                   value="add"
-                   onClick={this.onSubmit.bind(this)}/>
+            <Input onSubmit={this.addItem.bind(this)}/>
         </div>
     }
 }

@@ -20,7 +20,6 @@ export function addItem (item) {
 }
 
 export function toggleItem (id) {
-    debugger;
     return {
         type: TOGGLE_ITEM,
         id
@@ -28,6 +27,7 @@ export function toggleItem (id) {
 }
 
 export function setVisibilityFilter (filter) {
+    debugger;
     return {
         type: SET_VISIBILITY_FILTER,
         filter

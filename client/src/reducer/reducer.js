@@ -17,18 +17,18 @@ const initialState = {
         },
         {
             text: "Hello wolrd2",
-            id: Date.now(),
+            id: Date.now()+2,
             completed: false
         },
         {
             text: "Hello wolrd3",
-            id: Date.now(),
+            id: Date.now()+3,
             completed: false
         },
     ]
 };
 
-function visibilityFilters(state = initialState.visibilityFilter, action) {
+function visibilityFilter(state = initialState.visibilityFilter, action) {
     switch (action.type) {
         case SET_VISIBILITY_FILTER:
             return action.filter;
@@ -38,7 +38,6 @@ function visibilityFilters(state = initialState.visibilityFilter, action) {
 }
 
 function todos(state = initialState.todos, action) {
-    debugger;
     switch (action.type) {
         case ADD_ITEM:
             const item = Object.assign({}, action.item, {id: ++ITEM_ID});
@@ -56,6 +55,6 @@ function todos(state = initialState.todos, action) {
     }
 }
 
-const todoApp = combineReducers({visibilityFilters, todos});
+const todoApp = combineReducers({visibilityFilter, todos});
 
 export default todoApp;
