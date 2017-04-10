@@ -13,7 +13,7 @@ const initialState = {
         {
             text: "Hello wolrd",
             id: Date.now(),
-            completed: false
+            completed: true
         },
         {
             text: "Hello wolrd2",

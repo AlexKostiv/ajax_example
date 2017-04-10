@@ -4,15 +4,27 @@
 import React, { Component } from 'react';
 
 export default class Filter extends Component {
+    constructor() {
+        super();
+    }
+
+    componentWillMount() {
+    }
+
+    onChange() {
+
+        this.props.onChangeFilter(this.props.filter);
+    }
+
     render() {
         console.log(this.props);
-        const {filter, checked} = this.props;
+        const {filter, activeFilter} = this.props;
         return <div>
             <input
                 type="radio" name="filters"
-                   checked={checked}
-                   onClick={this.props.onFilterItems(filter)}
-                   value={filter}/><span>{filter}</span>
+                checked={filter === activeFilter}
+                onChange={this.onChange.bind(this)}
+                value={filter}/><span>{filter}</span>
         </div>
     }
 }

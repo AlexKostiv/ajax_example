@@ -9,19 +9,17 @@ import Filter from '../components/filter.component';
 class Footer extends Component {
     createInput() {
         const content = [];
-        const {onFilterItems, activeFilter} = this.props;
+        const {onChangeFilter, activeFilter} = this.props;
         let i = 0;
-        console.log(activeFilter);
+
         for (let _filter in VisibilityFilters) {
             if (VisibilityFilters.hasOwnProperty(_filter)) {
-                const checked = _filter === activeFilter;
                 content.push(<Filter key={++i}
-                    filter={_filter} checked={checked} onFilterItems={onFilterItems} />);
+                    filter={_filter} activeFilter={activeFilter} onChangeFilter={onChangeFilter} />);
             }
         }
 
         return content;
-
     }
 
     render() {
@@ -33,7 +31,7 @@ class Footer extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onFilterItems: (filter) => {
+        onChangeFilter: (filter) => {
             dispatch(setVisibilityFilter(filter));
         }
     }
@@ -41,7 +39,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        activeFilter: state.visibilityFilters
+        activeFilter: state.visibilityFilter
     }
 };
 

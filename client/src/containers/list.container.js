@@ -2,7 +2,7 @@
  * Created by IlyaLitvinov on 07.04.17.
  */
 import React, { Component } from 'react';
-import { toggleItem } from '../actions/actions';
+import { toggleItem, VisibilityFilters } from '../actions/actions';
 import { connect } from "react-redux";
 
 class List extends Component {
@@ -25,9 +25,26 @@ class List extends Component {
     }
 }
 
+const getVisibilityFilter = (todos, activeFilter) => {
+   switch (activeFilter) {
+       case VisibilityFilters.SHOW_ALL:
+           return todos;
+       case VisibilityFilters.SHOW_COMPLETED:
+           return todos.filter(item => {
+               return item.completed;
+           });
+       case VisibilityFilters.SHOW_ACTIVE:
+           return todos.filter(item => {
+               return !item.completed;
+           });
+       default:
+           throw Error('Please specify activeFilter!');
+   }
+};
+
 const mapStateToProps = (state) => {
     return {
-        todos: state.todos
+        todos: getVisibilityFilter(state.todos, state.visibilityFilter)
     }
 };
 

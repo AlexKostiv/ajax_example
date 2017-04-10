@@ -5,5 +5,8 @@ import { createStore } from 'redux';
 import todoApp from '../reducer/reducer';
 
 let store = createStore(todoApp);
-
+store.subscribe(() => {
+    console.log("STATE:");
+    console.log(store.getState());
+});
 export default store;
