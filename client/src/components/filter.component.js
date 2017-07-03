@@ -8,9 +8,6 @@ export default class Filter extends Component {
         super();
     }
 
-    componentWillMount() {
-    }
-
     onChange() {
 
         this.props.onChangeFilter(this.props.filter);

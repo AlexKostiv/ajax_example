@@ -5,6 +5,7 @@ const path = require("path");
 const baseConf = (_path) => {
     const dependecies = Object.keys(require(path.normalize(_path + '/package')).dependencies);
     const htmlSrc = path.normalize(_path+ "/src/index.html");
+
     return {
         entry: {
             application: path.normalize(_path + "/src/app.js"),
@@ -49,7 +50,6 @@ const baseConf = (_path) => {
                 "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
                 VERSION: JSON.stringify("5fa3b9"),
                 BROWSER_SUPPORTS_HTML5: true,
-                TWO: "1+1",
                 "typeof window": JSON.stringify("object")
             })
         ]
