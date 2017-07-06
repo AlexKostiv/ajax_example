@@ -50,7 +50,8 @@ var commentsModel = {
         updatedObject.date = new Date();
         updatedObject.author = data.author || updatedObject.author;
         updatedObject.text = data.text ||  updatedObject.text;
-        return data;
+        console.log(data);
+        return updatedObject;
     },
     deleteItem: function (id) {
         var index = items.indexOf(_.find(items, function (item) {
