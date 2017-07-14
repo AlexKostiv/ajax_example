@@ -2,7 +2,7 @@
  * Created by IlyaLitvinov on 01.12.15.
  */
 const express = require('express');
-const fruitesModel = require('../models/fruites.js');
+const fruitesModel = require('./fruites.js');
 const router = express.Router();
 
 router.get('/', function (req, res) {

@@ -5,7 +5,7 @@
  * Created by IlyaLitvinov on 01.12.15.
  */
 var express = require('express'),
-    commentsModel = require('../models/comments.js'),
+    commentsModel = require('./comments.js'),
     router = express.Router();
 
 

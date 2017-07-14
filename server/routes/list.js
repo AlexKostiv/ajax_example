@@ -2,7 +2,7 @@
  * Created by IlyaLitvinov on 14.10.16.
  */
 var express = require('express'),
-    listModel = require('../models/list.js'),
+    listModel = require('./list.js'),
     router = express.Router();
 
 
