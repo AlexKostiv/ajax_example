@@ -18,7 +18,7 @@ const baseConf = (_path) => {
     },
     //VERY IMPORTANT FIELD!
     resolve: {
-      extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx', '.styl']
     },
     module: {
       rules: [
@@ -28,6 +28,14 @@ const baseConf = (_path) => {
             {
               loader: 'html-loader'
             }
+          ]
+        },
+        {
+          test: /\.styl/,
+          use: [
+            'style-loader',
+            'css-loader',
+            'stylus-loader'
           ]
         },
         {

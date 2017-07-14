@@ -1,0 +1,17 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "max-len": [1, 120, 2, {"ignoreComments": true}],
+    "prop-types": [1],
+    "no-unused-vars": [1],
+    "comma-dangle": [0]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  },
+  "extends": ["airbnb-base"]
+}

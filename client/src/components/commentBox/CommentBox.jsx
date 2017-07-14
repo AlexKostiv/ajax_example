@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Header from './Header.jsx';
-import { Ajax } from '../utils/ajax';
+import Header from '../header/Header.jsx';
+import { Ajax } from '../../utils/ajax';
+
+import './commentBox.styl';
 
 export class CommentBox extends Component {
   constructor() {
@@ -15,8 +17,10 @@ export class CommentBox extends Component {
 
   render() {// eslint-disable-line
     return (
-      <div className="comment-box_header">
-        <Header onSubmit={this.pushItemToList.bind(this)}></Header>
+      <div className="c_comment-box">
+        <div className="c_comment-box_header">
+          <Header onSubmit={this.pushItemToList.bind(this)}></Header>
+        </div>
       </div>
     );
   }
