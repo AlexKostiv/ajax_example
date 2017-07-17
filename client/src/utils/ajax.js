@@ -1,5 +1,4 @@
 /*  globals XMLHttpRequest */
-
 export class Ajax {
   static get(url, successCallback, errorCallback) {
     const xhr = new XMLHttpRequest();
