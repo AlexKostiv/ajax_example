@@ -47,9 +47,9 @@ const baseConf = (_path) => {
                 presets: ['env', 'react']
               }
             },
-            {
-              loader: 'eslint-loader'
-            }
+            // {
+            //   loader: 'eslint-loader'
+            // }
           ]
         }
       ]

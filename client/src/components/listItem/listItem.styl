@@ -1,0 +1,26 @@
+@import'../../styles/variables.styl';
+textPosition=1rem;
+.list-item
+	width 100%
+	box-shadow baseBoxShadow
+	background #FFF
+	position relative
+	padding 1rem
+	box-sizing border-box
+	margin 1rem 0
+	&_author
+		position relative
+		height 1.5rem
+	&_author-content
+		position absolute
+		top 50%
+		left 0
+		transform translateY(-50%)
+	&_author-input
+		opacity 0
+		position absolute
+		top 50%
+		left 0
+	&.editable
+		.list-item_author-content
+			border 1px solid blue

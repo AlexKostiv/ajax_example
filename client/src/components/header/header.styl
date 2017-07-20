@@ -1,8 +1,39 @@
+@import'../../styles/variables.styl';
+
+inputBackgroundColor=#FFF;
+inputPadding = 0.5rem 1.5rem;
+inputBorderRadius=0.25rem;
 .header
-	width 100%
-	box-shadow 1px 1px 1px 1px rgba(0,0,0,.3);
+	width 100
 	padding 1rem
 	box-sizing border-box
+	box-shadow baseBoxShadow
+	background #FFF
+	h2
+		text-align center
+		text-transform uppercase
+		text-shadow 1px 1px 0px rgba(0,0,0,.3);
 	&__light
 		background
+	> *
+		margin 2rem 0;
+	.c_input
+		width 100%
+		.input_field
+			background inputBackgroundColor
+			width 100%
+			box-sizing border-box
+			padding inputPadding
+			border 1px solid #efefef
+			border-radius inputBorderRadius
+
+	.textarea
+		width 100%
+		box-sizing border-box
+		min-height 3rem;
+		box-shadow inputBoxShadow
+		background inputBackgroundColor
+		padding inputPadding
+		border-radius inputBorderRadius
+		border 1px solid #efefef
 
