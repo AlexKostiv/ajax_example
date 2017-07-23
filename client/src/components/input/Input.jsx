@@ -1,10 +1,6 @@
 import React, { Component } from 'react'; // eslint-disable-line
 
-export class Input extends Component {
-  constructor() {
-    super();
-  }
-
+class Input extends Component {
   render() {
     return (
       <div class='el_input'>
@@ -12,4 +8,6 @@ export class Input extends Component {
       </div>
     );
   }
-};
+}
+
+export default Input;

@@ -8,7 +8,9 @@
     "class-methods-use-this": [1],
     "eol-last": [1],
     "no-trailing-spaces": [0],
-    "no-underscore-dangle": [0]
+    "no-underscore-dangle": [0],
+    "prefer-arrow-callback": [2],
+    "prefer-default-export": [0]
   },
   "settings": {
     "import/resolver": {

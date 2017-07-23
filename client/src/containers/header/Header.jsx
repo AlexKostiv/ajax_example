@@ -7,7 +7,6 @@ class Header extends Component {
     this.headerText = 'Comment box';
     this.btnLabel = 'Add';
     this.state = {
-      author: '',
       text: 'hello worrld'
     };
 
@@ -34,8 +33,6 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    console.log('Component did mount!');
-    console.log(this.props);
   }
 
   addItem(e) {
@@ -48,9 +45,6 @@ class Header extends Component {
       <div className="c_input">
         <input type="text" className="input_field" onChange={this.updateAuthorName.bind(this)} value={this.state.author}/>
       </div>
-      <div className="c_textarea">
-        <textarea className="textarea" onChange={this.updateText.bind(this)} value={this.state.text}></textarea>
-      </div>
       <div className="c_btn">
         <div className="btn btn-add" onClick={this.addItem.bind(this)}>{this.btnLabel}</div>
       </div>
@@ -59,5 +53,3 @@ class Header extends Component {
 }
 
 export default Header;
-
-

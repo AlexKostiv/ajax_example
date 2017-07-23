@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './listItem.styl';
+import './Item.styl';
 
 class ListItem extends Component {
   constructor() {
@@ -21,19 +21,17 @@ class ListItem extends Component {
   }
 
   _enableEdit(e) {
-    console.log('test');
     e.target.classList.add('editable');
 
-    this.setState((prevState, newValue) => {
-      prevState.isEditable = true;
-      console.log(prevState);
-      return prevState;
+    this.setState((prevState) => {
+      const newState = Object.assign(prevState);
+      newState.isEditable = true;
+      return newState;
     });
   }
 
 
   onBlur(e) {
-    console.log(e);
     e.target.closest('.list-item').classList.remove('editable');
     e.persist();
     this.setState((prevState, newValue) => {
@@ -44,7 +42,6 @@ class ListItem extends Component {
     }, () => {
       this.props.onUpdate(this.state.comment);
     });
-
   }
 
   render() {
