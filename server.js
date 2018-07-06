@@ -9,7 +9,7 @@ const calc = require('./routes/calc');
 const list = require('./routes/list');
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
@@ -21,7 +21,7 @@ app.get('/', function (req, res) {
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods","Access-Control-Allow-Methods,  DELETE, PUT");
+    res.header("Access-Control-Allow-Methods", "Access-Control-Allow-Methods,  DELETE, PUT");
     next();
 });
 
@@ -33,13 +33,12 @@ app.use('/list', list);
 
 app.get('/users', function (req, res) {
     console.log('Reuest recived!!!');
-    res.sendFile('users.json', {root: __dirname});
+    res.sendFile('users.json', { root: __dirname });
 });
 
+const appPort = process.env.PORT || 4001;
+const server = app.listen(appPort, function () {
+    const host = server.address().address;
 
-var server = app.listen(4001, function () {
-    var host = server.address().address;
-    var port = server.address().port;
-
-    console.log('Example app listening at http://localhost:4001');
+    console.log(`Example app listening at ${host + appPort}`);
 });
