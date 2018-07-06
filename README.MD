@@ -54,3 +54,5 @@ baseUrl - http://localhost:4001
 4. Редактирование задачи 
 - PUT на `http://localhost:4001/list/:id` в body `{title: "Текст задачи"}`
 
+Heroku deploy git push heroku master
+public url https://evening-dawn-11092.herokuapp.com/
