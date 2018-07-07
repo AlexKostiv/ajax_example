@@ -1,7 +1,4 @@
 /**
- * Created by IlyaLitvinov on 14.10.16.
- */
-/**
  * Created by IlyaLitvinov on 01.12.15.
  */
 var _ = require('lodash');

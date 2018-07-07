@@ -1,11 +1,9 @@
 /**
  * Created by IlyaLitvinov on 14.10.16.
  */
-var express = require('express'),
-    listModel = require('../models/list.js'),
-    router = express.Router();
-
-
+const express = require('express');
+const listModel = require('../models/list.js');
+const router = express.Router();
 
 router.get('/', function (req, res) {
     setTimeout(function () {
@@ -18,12 +16,10 @@ router.post('/', function (req, res) {
 
     if (req.body) {
         console.log(req.body);
-        setTimeout(function () {
-            response = listModel.setItem(req.body);
-            res.status(200).send(response);
-        }, 0);
+        response = listModel.setItem(req.body);
+        res.status(200).send(response);
     } else {
-        res.status(500).send('Bad request, please specify comment field').end();
+        res.status(400).send('Не верный запрос, в запросе нет body').end();
     }
 });
 
